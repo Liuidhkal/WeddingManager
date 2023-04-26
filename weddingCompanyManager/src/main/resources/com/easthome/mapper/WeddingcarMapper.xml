@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easthome.mapper.WeddingcarMapper">
+    <select id="findAll" resultType="Weddingcar">
+        select * from weddingcar
+    </select>
+
+    <select id="findByGoodsId" parameterType="String" resultType="Weddingcar">
+        select * from weddingcar where c_id = #{param1}
+    </select>
+
+    <update id="updateByCount">
+        update weddingcar set c_count = c_count-#{param2} where c_id = #{param1}
+    </update>
+</mapper>

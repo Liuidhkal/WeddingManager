@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easthome.mapper.ShoppingMapper">
+    <select id="findGoodsidAndUserid" resultType="ShoppingCar">
+        select * from shoppingCar where goods_id = #{param1} and user_id = #{param2}
+    </select>
+    
+    <insert id="insertByStyle">
+        insert into shoppingcar(goods_id, goods_photo, goods_name, goods_money, goods_number, goods_total, user_id)
+            values (#{param1.style_id}, #{param1.photo}, #{param1.s_name}, #{param1.money}, 1, #{param1.money}, #{param2})
+    </insert>
+    
+    <insert id="insertByWeddingcar">
+        insert into shoppingcar(goods_id, goods_photo, goods_name, goods_money, goods_number, goods_total, user_id)
+            values (#{param1.c_id}, #{param1.c_photo}, #{param1.c_name}, #{param1.c_money}, #{param3}, #{param1.c_money}, #{param2})
+    </insert>
+
+    <insert id="insertByDress">
+        insert into shoppingcar(goods_id, goods_photo, goods_name, goods_money, goods_number, goods_total, user_id)
+            values (#{param1.d_id}, #{param1.d_photo}, #{param1.d_name}, #{param1.d_money}, 1, #{param1.d_money}, #{param2})
+    </insert>
+
+    <update id="updateGoods">
+        update shoppingcar set goods_number = goods_number+#{param3} where goods_id = #{param1} and user_id = #{param2}
+    </update>
+
+    <select id="findAllByShopping" resultType="ShoppingCar">
+        select * from shoppingcar where user_id = #{param1}
+    </select>
+
+    <delete id="delById">
+        delete from shoppingcar where id = #{param1}
+    </delete>
+
+    <update id="updateById">
+        update shoppingcar set goods_number = goods_number-1 where id = #{param1}
+    </update>
+
+    <delete id="deleteAll" parameterType="String">
+        delete from shoppingcar
+        <where>
+            <foreach collection="array" open="id in(" close=")" separator="," item="id">
+                #{id}
+            </foreach>
+        </where>
+    </delete>
+</mapper>
